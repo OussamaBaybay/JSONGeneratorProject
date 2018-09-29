@@ -1,14 +1,31 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import TextField from "@material-ui/core/TextField";
+import MenuItem from '@material-ui/core/MenuItem';
 
 const ComponentObject = props =>{
   let counter = Math.random().toString(36).substring(7);
   return <React.Fragment>
     <li>
-      <input type="checkbox" id={"cb-" + counter} />
-      <label for={"cb-" + counter}>
-          <span>{'key: ' + props.k + '| type: Object'}</span>
+      <input className="checkcheck"  type="checkbox" id={"cb-" + counter} />
+      <label className="labelCheck" for={"cb-" + counter}>
+      <span>
+      <TextField
+          id="outlined-uncontrolled"
+          label="Key"
+          defaultValue={props.k}
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          id="outlined-uncontrolled"
+          label="type"
+          defaultValue = "Object"
+          margin="normal"
+          variant="outlined"
+        />
+        </span>
         </label>
     <ul>{Object.keys(props.data).map((r, i) => {
       return switchFunc(props.data[r], r)
@@ -17,32 +34,172 @@ const ComponentObject = props =>{
       </React.Fragment>
 }
 
-const arrayTest = [
-  {"name": "moha"},
-  {"age": 555}
+const types = [
+  {
+    value: "object",
+    label: "object"
+  },
+  {
+    value: "array",
+    label: "array"
+  },
+  {
+    value: "string",
+    label: "string"
+  },
+  {
+    value: "bolean",
+    label: "bolean"
+  },
+  {
+    value: "number",
+    label: "number"
+  }
 ];
 
+
 const ComponentString = props => {
-  return <li>{'key: ' +props.k + "|  type: " + typeof props.data + '| value: '+ props.data}</li>;
+  return <li>
+    <TextField
+          id="outlined-uncontrolled"
+          label="Key"
+          defaultValue={props.k}
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          id="outlined-uncontrolled"
+          label="type"
+          defaultValue ={typeof props.data}
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          id="outlined-uncontrolled"
+          label="value"
+          defaultValue ={props.data}
+          margin="normal"
+          variant="outlined"
+        />
+  </li>;
 }
 const ComponentNumber = props => {
-  return <li>{'key: ' +props.k + "|  type: " + typeof props.data + '| value: '+ props.data}</li>;
+  return <li><TextField
+          id="outlined-uncontrolled"
+          label="Key"
+          defaultValue={props.k}
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          id="outlined-uncontrolled"
+          label="type"
+          defaultValue ={typeof props.data}
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          id="outlined-uncontrolled"
+          label="value"
+          defaultValue ={props.data}
+          margin="normal"
+          variant="outlined"
+        />
+        {/* just a test */}
+        {/* <TextField
+          id="outlined-select-currency"
+          select
+          label="Select"
+           value={this.state.type}
+           onChange={this.handleChange('currency')}
+          margin="normal"
+          variant="outlined"
+        >
+          {types.map(option => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField> */}
+        { /* just a test */ }
+        </li>;
 }
 const ComponentArray = props => {
   let counter = Math.random().toString(36).substring(7);
   return <React.Fragment>
     <li>
-      <input type="checkbox" id={"cb-" + counter} />
-      <label for={"cb-" + counter}>
-        <span>{'key: ' + props.k + '| type: Array'}</span>
-    </label>
-            <ul>{props.data.map((r) => Object.keys(r).map((k) =>{
-                return <li>{'key: ' + k + '| type: '+ typeof r[k]+ '| value: '+r[k] }</li>
-      }))}</ul></li>
+      <input className="checkcheck" type="checkbox" id={"cb-" + counter} />
+      <label className="labelCheck" for={"cb-" + counter}>
+        <span>
+      <TextField
+          id="outlined-uncontrolled"
+          label="Key"
+          defaultValue={props.k}
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          id="outlined-uncontrolled"
+          label="type"
+          defaultValue = "Array"
+          margin="normal"
+          variant="outlined"
+        />
+        </span>
+      </label>
+        <ul>
+        {props.data.map((r) => Object.keys(r).map((k) =>{
+                return <li>
+                <TextField
+          id="outlined-uncontrolled"
+          label="Key"
+          defaultValue={k}
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          id="outlined-uncontrolled"
+          label="type"
+          defaultValue={typeof r[k]}
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          id="outlined-uncontrolled"
+          label="Value"
+          defaultValue={r[k]}
+          margin="normal"
+          variant="outlined"
+        />
+        </li>
+      }))}
+        </ul>
+    </li>
         </React.Fragment>
 }
 const ComponentBolean = props => {
-  return <li>{'key: ' + props.k + "|  type: " + typeof props.data + '| value: '+ props.data}</li>;
+  return <li>
+        <TextField
+          id="outlined-uncontrolled"
+          label="Key"
+          defaultValue={props.k}
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          id="outlined-uncontrolled"
+          label="type"
+          defaultValue ={typeof props.data}
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          id="outlined-uncontrolled"
+          label="value"
+          defaultValue ={props.data}
+          margin="normal"
+          variant="outlined"
+        /></li>;
 }
 
 const switchFunc = (data, key)=>{
@@ -81,14 +238,6 @@ const mockData = {
     "id": 13
   }]
 }
-// const mockData = {
-//   "infos": {},
-//   "infos2": { "name": "jamal", "age": 33 },
-//   "id": 1,
-//   "country": "fuckinMorocco",
-//   "modules": [{ "xxdf": "wcxwdsf" }, { "number": 123 }],
-//   "Authorized": true
-// }
 
 class App extends Component {
   constructor(props) {

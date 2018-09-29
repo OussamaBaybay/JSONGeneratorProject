@@ -45,12 +45,11 @@
 
 html,
 body {
-  background-color: #000;
+  background-color: rgb(62, 172, 130);
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden;
   color: rgba(255, 255, 255, 0.5);
   font-family: 'Open Sans Condensed', sans-serif;
 }
@@ -73,14 +72,15 @@ h2 {
   font-size: 20px;
 }
 
-.treeview:hover input~label:before,
-.treeview.hover input~label:before {
+.treeview:hover .checkcheck~label:before,
+.treeview.hover .checkcheck~label:before {
   opacity: 1;
   -webkit-transition-duration: 0.5s;
   -moz-transition-duration: 0.5s;
   -ms-transition-duration: 0.5s;
   -o-transition-duration: 0.5s;
   transition-duration: 0.5s;
+  border-width: 8px;
 }
 
 .treeview ul {
@@ -115,19 +115,19 @@ h2 {
   transition-duration: 0.3s;
 }
 
-.treeview input {
+.treeview .checkcheck {
   display: none;
 }
 
-.treeview input:checked~ul {
+.treeview .checkcheck:checked~ul {
   display: none;
 }
 
-.treeview input~label {
+.treeview .checkcheck~label {
   cursor: pointer;
 }
 
-.treeview input~label:before {
+.treeview .checkcheck~label:before {
   content: '';
   width: 0;
   height: 0;
@@ -153,9 +153,9 @@ h2 {
   transition-duration: 1s;
 }
 
-.treeview input:checked~label:before {
+.treeview .checkcheck:checked~label:before {
   margin-left: -0.8em;
-  border-width: 5px;
+  border-width: 12px;
   border-top-color: transparent;
   border-right-color: transparent;
   border-bottom-color: transparent;
