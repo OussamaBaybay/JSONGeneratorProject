@@ -45,9 +45,9 @@
 
 html,
 body {
-  background-color: rgb(62, 172, 130);
+  background-color: rgba(14, 5, 5, 0.178);
   width: 100%;
-  height: 100%;
+  height: 200%;
   margin: 0;
   padding: 0;
   color: rgba(255, 255, 255, 0.5);
@@ -62,6 +62,7 @@ h2 {
   margin-bottom: 0;
 }
 
+
 .treeview {
   float: left;
   -webkit-user-select: none;
@@ -70,6 +71,16 @@ h2 {
   -o-user-select: none;
   user-select: none;
   font-size: 20px;
+}
+.labelCheck{
+  display: flex;
+}
+
+.labelCheck:hover {
+  background: red;
+}
+.liNotObject:hover {
+  background: red;
 }
 
 .treeview:hover .checkcheck~label:before,

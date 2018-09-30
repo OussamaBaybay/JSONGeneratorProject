@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import TextField from "@material-ui/core/TextField";
 import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
 
 const ComponentObject = props =>{
   let counter = Math.random().toString(36).substring(7);
@@ -17,6 +18,7 @@ const ComponentObject = props =>{
           defaultValue={props.k}
           margin="normal"
           variant="outlined"
+          style={{marginLeft:10}}
         />
         <TextField
           id="outlined-uncontrolled"
@@ -24,7 +26,11 @@ const ComponentObject = props =>{
           defaultValue = "Object"
           margin="normal"
           variant="outlined"
+          style={{marginLeft:10}}
         />
+        <Button style={{margin:"25px 0px 0px 10px"}} variant="contained">
+        Delete
+        </Button>
         </span>
         </label>
     <ul>{Object.keys(props.data).map((r, i) => {
@@ -59,13 +65,14 @@ const types = [
 
 
 const ComponentString = props => {
-  return <li>
+  return <li className="liNotObject">
     <TextField
           id="outlined-uncontrolled"
           label="Key"
           defaultValue={props.k}
           margin="normal"
           variant="outlined"
+          style={{marginLeft:10}}
         />
         <TextField
           id="outlined-uncontrolled"
@@ -73,6 +80,7 @@ const ComponentString = props => {
           defaultValue ={typeof props.data}
           margin="normal"
           variant="outlined"
+          style={{marginLeft:10}}
         />
         <TextField
           id="outlined-uncontrolled"
@@ -80,16 +88,22 @@ const ComponentString = props => {
           defaultValue ={props.data}
           margin="normal"
           variant="outlined"
+          style={{marginLeft:10}}
         />
+        <Button style={{margin:"25px 0px 0px 10px"}} variant="contained">
+        Delete
+        </Button>
   </li>;
 }
 const ComponentNumber = props => {
-  return <li><TextField
+  return <li className="liNotObject">
+      <TextField
           id="outlined-uncontrolled"
           label="Key"
           defaultValue={props.k}
           margin="normal"
           variant="outlined"
+          style={{marginLeft:10}}
         />
         <TextField
           id="outlined-uncontrolled"
@@ -97,6 +111,7 @@ const ComponentNumber = props => {
           defaultValue ={typeof props.data}
           margin="normal"
           variant="outlined"
+          style={{marginLeft:10}}
         />
         <TextField
           id="outlined-uncontrolled"
@@ -104,7 +119,11 @@ const ComponentNumber = props => {
           defaultValue ={props.data}
           margin="normal"
           variant="outlined"
+          style={{marginLeft:10}}
         />
+        <Button style={{margin:"25px 0px 0px 10px"}} variant="contained">
+        Delete
+        </Button>
         {/* just a test */}
         {/* <TextField
           id="outlined-select-currency"
@@ -137,6 +156,7 @@ const ComponentArray = props => {
           defaultValue={props.k}
           margin="normal"
           variant="outlined"
+          style={{marginLeft:10}}
         />
         <TextField
           id="outlined-uncontrolled"
@@ -144,18 +164,23 @@ const ComponentArray = props => {
           defaultValue = "Array"
           margin="normal"
           variant="outlined"
+          style={{marginLeft:10}}
         />
+        <Button style={{margin:"25px 0px 0px 10px"}} variant="contained">
+        Delete
+        </Button>
         </span>
       </label>
         <ul>
         {props.data.map((r) => Object.keys(r).map((k) =>{
-                return <li>
-                <TextField
+      return <li className="liNotObject">
+        <TextField
           id="outlined-uncontrolled"
           label="Key"
           defaultValue={k}
           margin="normal"
           variant="outlined"
+          style={{marginLeft:10}}
         />
         <TextField
           id="outlined-uncontrolled"
@@ -163,6 +188,7 @@ const ComponentArray = props => {
           defaultValue={typeof r[k]}
           margin="normal"
           variant="outlined"
+          style={{marginLeft:10}}
         />
         <TextField
           id="outlined-uncontrolled"
@@ -170,7 +196,11 @@ const ComponentArray = props => {
           defaultValue={r[k]}
           margin="normal"
           variant="outlined"
+          style={{marginLeft:10}}
         />
+        <Button style={{margin:"25px 0px 0px 10px"}} variant="contained">
+        Delete
+        </Button>
         </li>
       }))}
         </ul>
@@ -178,13 +208,14 @@ const ComponentArray = props => {
         </React.Fragment>
 }
 const ComponentBolean = props => {
-  return <li>
+  return <li className="liNotObject">
         <TextField
           id="outlined-uncontrolled"
           label="Key"
           defaultValue={props.k}
           margin="normal"
           variant="outlined"
+          style={{marginLeft:10}}
         />
         <TextField
           id="outlined-uncontrolled"
@@ -192,6 +223,7 @@ const ComponentBolean = props => {
           defaultValue ={typeof props.data}
           margin="normal"
           variant="outlined"
+          style={{marginLeft:10}}
         />
         <TextField
           id="outlined-uncontrolled"
@@ -199,7 +231,12 @@ const ComponentBolean = props => {
           defaultValue ={props.data}
           margin="normal"
           variant="outlined"
-        /></li>;
+          style={{marginLeft:10}}
+        />
+        <Button style={{margin:"25px 0px 0px 10px"}} variant="contained">
+        Delete
+        </Button>
+        </li>;
 }
 
 const switchFunc = (data, key)=>{
@@ -252,11 +289,9 @@ class App extends Component {
   }
   render() {
     return <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <input type="button" value="add1" />
+        <Button variant="contained" color="secondary">
+        ADD
+      </Button>
       <div class="treeview hover">
       <ul>
         {Object.keys(mockData).map((r, i) => {
