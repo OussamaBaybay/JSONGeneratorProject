@@ -9,6 +9,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const ComponentObject = props =>{
   let counter = Math.random().toString(36).substring(7);
@@ -295,9 +296,11 @@ class App extends Component {
     return <div className="App">
     <AppBar position="static">
         <Toolbar>
-          <IconButton color="inherit" aria-label="Menu">
-          <AddIcon />
-          </IconButton>
+          <Tooltip title="Add">
+            <IconButton color="inherit" aria-label="Menu">
+              <AddIcon />
+            </IconButton>
+          </Tooltip>
           <Typography variant="title" color="inherit">
             Json Generator
           </Typography>
