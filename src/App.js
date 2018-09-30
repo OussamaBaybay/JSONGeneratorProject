@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import TextField from "@material-ui/core/TextField";
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import AddIcon from '@material-ui/icons/Add';
 
 const ComponentObject = props =>{
   let counter = Math.random().toString(36).substring(7);
@@ -28,8 +33,8 @@ const ComponentObject = props =>{
           variant="outlined"
           style={{marginLeft:10}}
         />
-        <Button style={{margin:"25px 0px 0px 10px"}} variant="contained">
-        Delete
+        <Button style={{margin:"15px 0px 0px 10px"}} variant="fab">
+          <DeleteIcon />
         </Button>
         </span>
         </label>
@@ -63,7 +68,6 @@ const types = [
   }
 ];
 
-
 const ComponentString = props => {
   return <li className="liNotObject">
     <TextField
@@ -90,8 +94,8 @@ const ComponentString = props => {
           variant="outlined"
           style={{marginLeft:10}}
         />
-        <Button style={{margin:"25px 0px 0px 10px"}} variant="contained">
-        Delete
+        <Button style={{margin:"15px 0px 0px 10px"}} variant="fab">
+          <DeleteIcon />
         </Button>
   </li>;
 }
@@ -121,8 +125,8 @@ const ComponentNumber = props => {
           variant="outlined"
           style={{marginLeft:10}}
         />
-        <Button style={{margin:"25px 0px 0px 10px"}} variant="contained">
-        Delete
+        <Button style={{margin:"15px 0px 0px 10px"}} variant="fab">
+          <DeleteIcon />
         </Button>
         {/* just a test */}
         {/* <TextField
@@ -166,8 +170,8 @@ const ComponentArray = props => {
           variant="outlined"
           style={{marginLeft:10}}
         />
-        <Button style={{margin:"25px 0px 0px 10px"}} variant="contained">
-        Delete
+        <Button style={{margin:"15px 0px 0px 10px"}} variant="fab">
+          <DeleteIcon />
         </Button>
         </span>
       </label>
@@ -198,8 +202,8 @@ const ComponentArray = props => {
           variant="outlined"
           style={{marginLeft:10}}
         />
-        <Button style={{margin:"25px 0px 0px 10px"}} variant="contained">
-        Delete
+        <Button style={{margin:"15px 0px 0px 10px"}} variant="fab">
+          <DeleteIcon />
         </Button>
         </li>
       }))}
@@ -233,8 +237,8 @@ const ComponentBolean = props => {
           variant="outlined"
           style={{marginLeft:10}}
         />
-        <Button style={{margin:"25px 0px 0px 10px"}} variant="contained">
-        Delete
+        <Button style={{margin:"15px 0px 0px 10px"}} variant="fab">
+          <DeleteIcon />
         </Button>
         </li>;
 }
@@ -289,9 +293,16 @@ class App extends Component {
   }
   render() {
     return <div className="App">
-        <Button variant="contained" color="secondary">
-        ADD
-      </Button>
+    <AppBar position="static">
+        <Toolbar>
+          <IconButton color="inherit" aria-label="Menu">
+          <AddIcon />
+          </IconButton>
+          <Typography variant="title" color="inherit">
+            Json Generator
+          </Typography>
+        </Toolbar>
+      </AppBar>
       <div class="treeview hover">
       <ul>
         {Object.keys(mockData).map((r, i) => {
