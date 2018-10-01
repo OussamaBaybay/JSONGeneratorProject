@@ -23,20 +23,28 @@ const ComponentObject = props =>{
             style={{marginLeft:10}}
           />
           <TextField
-            id="outlined-uncontrolled"
-            label="type"
-            defaultValue = "Object"
+            id="outlined-select-currency"
+            select
+            label="Type"
+            value={typeof props.data}
+            onChange={(e)=>props.handleChange(e, props.m, props.k)}
             margin="normal"
             variant="outlined"
             style={{marginLeft:10}}
-          />
+          >
+            {props.types.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
           <Button style={{margin:"15px 0px 0px 10px"}} onClick={()=>props.addRow(props.data)} variant="fab">
             <AddIcon />
           </Button>
           <Button style={{margin:"15px 0px 0px 10px"}} onClick={()=>props.deleteRow(props.m, props.data, props.k)} variant="fab">
             <DeleteIcon />
           </Button>
-  
+
           </span>
           </label>
       <ul>{Object.keys(props.data).map((r, i) => {
@@ -46,4 +54,3 @@ const ComponentObject = props =>{
         </Fragment>
   }
 export default ComponentObject;
-  

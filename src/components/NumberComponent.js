@@ -16,13 +16,21 @@ const ComponentNumber = props => {
             margin="normal"
           />
           <TextField
-            id="outlined-uncontrolled"
-            label="type"
-            defaultValue ={typeof props.data}
+            id="outlined-select-currency"
+            select
+            label="Type"
+            value={typeof props.data}
+            onChange={(e)=>props.handleChange(e, props.m, props.k)}
             margin="normal"
             variant="outlined"
             style={{marginLeft:10}}
-          />
+          >
+            {props.types.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
           <TextField
             id="outlined-uncontrolled"
             label="value"
@@ -36,23 +44,6 @@ const ComponentNumber = props => {
         <Button style={{margin:"15px 0px 0px 10px"}} onClick={()=>props.deleteRow(props.m, props.data, props.k)} variant="fab">
             <DeleteIcon />
           </Button>
-          {/* just a test */}
-          {/* <TextField
-            id="outlined-select-currency"
-            select
-            label="Select"
-             value={this.state.type}
-             onChange={this.handleChange('currency')}
-            margin="normal"
-            variant="outlined"
-          >
-            {types.map(option => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField> */}
-          { /* just a test */ }
           </li>;
   }
   export default ComponentNumber

@@ -22,13 +22,21 @@ const ComponentArray = props => {
             style={{marginLeft:10}}
           />
           <TextField
-            id="outlined-uncontrolled"
-            label="type"
-            defaultValue = "Array"
+            id="outlined-select-currency"
+            select
+            label="Type"
+            value={Array.isArray(props.data)?"array":typeof props.data}
+            onChange={(e)=>props.handleChange(e, props.m, props.k)}
             margin="normal"
             variant="outlined"
             style={{marginLeft:10}}
-          />
+          >
+            {props.types.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
         <Button style={{margin:"15px 0px 0px 10px"}} onClick={()=>props.addRow(props.data)} variant="fab">
             <AddIcon />
           </Button>
@@ -50,13 +58,21 @@ const ComponentArray = props => {
             style={{marginLeft:10}}
           />
           <TextField
-            id="outlined-uncontrolled"
-            label="type"
-            defaultValue={typeof r[k]}
+            id="outlined-select-currency"
+            select
+            label="Type"
+            value={typeof r[k]}
+            onChange={(e)=>props.handleChange(e, r, k)}
             margin="normal"
             variant="outlined"
             style={{marginLeft:10}}
-          />
+          >
+            {props.arrayTypes.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
           <TextField
             id="outlined-uncontrolled"
             label="Value"

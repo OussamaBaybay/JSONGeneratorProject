@@ -16,13 +16,21 @@ const ComponentString = props => {
             style={{marginLeft:10}}
           />
           <TextField
-            id="outlined-uncontrolled"
-            label="type"
-            defaultValue ={typeof props.data}
+            id="outlined-select-currency"
+            select
+            label="Type"
+            value={typeof props.data}
+            onChange={(e)=>props.handleChange(e, props.m, props.k)}
             margin="normal"
             variant="outlined"
             style={{marginLeft:10}}
-          />
+          >
+            {props.types.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
           <TextField
             id="outlined-uncontrolled"
             label="value"

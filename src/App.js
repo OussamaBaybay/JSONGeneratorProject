@@ -12,54 +12,51 @@ import ComponentArray from './components/ArrayComponent'
 import ComponentObject from './components/ObjectComponent'
 import ComponentNumber from './components/NumberComponent'
 
-const types = [
-  {
-    value: "object",
-    label: "object"
-  },
-  {
-    value: "array",
-    label: "array"
-  },
-  {
-    value: "string",
-    label: "string"
-  },
-  {
-    value: "bolean",
-    label: "bolean"
-  },
-  {
-    value: "number",
-    label: "number"
-  }
-];
-
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mockData: {
-        name: "Revenue",
-        id: 13,
-        type: "C",
-        structor: {
-          structorText: "text",
-          bolean: false,
-          substructor: {
-            substructorNumber: 15,
-            sutractor3: {
-              nestedbolean3: true,
-            }
-          }
-        }, subModules: [{
-          Authorized: false
-        }, {
-          id: 13
-        }]
-      }
+      mockData: JSON.parse(localStorage.getItem('mockData'))?JSON.parse(localStorage.getItem('mockData')):{},
+      types: [
+        {
+          value: "object",
+          label: "object"
+        },
+        {
+          value: "array",
+          label: "array"
+        },
+        {
+          value: "string",
+          label: "string"
+        },
+        {
+          value: "boolean",
+          label: "boolean"
+        },
+        {
+          value: "number",
+          label: "number"
+        }
+      ],
+      arrayTypes: [
+        {
+          value: "string",
+          label: "string"
+        },
+        {
+          value: "boolean",
+          label: "boolean"
+        },
+        {
+          value: "number",
+          label: "number"
+        }
+      ]
+
     };
+
   }
   addRow = (m) => {
     if (Array.isArray(m)) {
@@ -73,6 +70,7 @@ class App extends Component {
     this.setState({
       mockData
     });
+    localStorage.setItem('mockData',JSON.stringify(mockData))
   }
   changeKey = (e, m, key) => {
     if (key != e.target.value) {
@@ -84,6 +82,7 @@ class App extends Component {
     this.setState({
       mockData
     });
+    localStorage.setItem('mockData',JSON.stringify(mockData))
   }
   changeValue = (e, m, key) => {
     m[key] = e.target.value;
@@ -91,14 +90,31 @@ class App extends Component {
     this.setState({
       mockData
     });
+    localStorage.setItem('mockData',JSON.stringify(mockData))
+  }
+  handleChange = (e, m, key) => {
+    if (e.target.value == "number") {
+        m[key] = 0;
+    }else if (e.target.value == "string") {
+        m[key] = '';
+    }else if (e.target.value == "boolean") {
+        m[key] = true;
+    }else if (e.target.value == "object") {
+        m[key] = {};
+    }else if (e.target.value == "array") {
+        m[key] = [];
+    }
+
+    let mockData = this.state.mockData;
+    this.setState({
+      mockData
+    });
+    localStorage.setItem('mockData',JSON.stringify(mockData))
   }
   deleteRow = (m, data, key) => {
     if (Array.isArray(m)) {
       let array = m;
       array.splice(key, 1);
-      console.log(array);
-      //array.map(r=>m.push(r));
-      console.log(m);
 
     } else {
       delete m[key];
@@ -108,55 +124,69 @@ class App extends Component {
     this.setState({
       mockData
     });
+    localStorage.setItem('mockData',JSON.stringify(mockData))
   }
 
   switchFunc = (m, data, key)=>{
     switch(typeof data){
       case "boolean":
-        return <ComponentBolean 
-                m={m} 
-                changeValue={(e,m,value)=>this.changeValue(e, m, value)} 
-                changeKey={(e,m,key)=>this.changeKey(e,m,key)} data={data} 
-                k={key} 
+        return <ComponentBolean
+                m={m}
+                changeValue={(e,m,value)=>this.changeValue(e, m, value)}
+                changeKey={(e,m,key)=>this.changeKey(e,m,key)} data={data}
+                k={key}
                 deleteRow={(m, d, k)=>{this.deleteRow(m, d, k)}}
+                types={this.state.types}
+                handleChange={(e, m, value)=>this.handleChange(e, m, value)}
+
                 />
       case "string":
-        return <ComponentString 
-                m={m} 
-                changeValue={(e,m,value)=>this.changeValue(e, m, value)} 
-                changeKey={(e,m,key)=>this.changeKey(e,m,key)} 
-                data={data} 
-                k={key} 
+        return <ComponentString
+                m={m}
+                changeValue={(e,m,value)=>this.changeValue(e, m, value)}
+                changeKey={(e,m,key)=>this.changeKey(e,m,key)}
+                data={data}
+                k={key}
                 deleteRow={(m, d, k)=>this.deleteRow(m, d, k)}
+                types={this.state.types}
+                handleChange={(e, m, value)=>this.handleChange(e, m, value)}
+
                 />;
       case "object":
         if (Array.isArray(data)){
-          return <ComponentArray 
-                  m={m} 
-                  changeValue={(e,m,value)=>this.changeValue(e, m, value)} 
-                  changeKey={(e,m,key)=>this.changeKey(e,m,key)} 
-                  data={data} k={key} 
-                  addRow={(m)=>this.addRow(m)} 
-                  deleteRow={(m, d, k)=>this.deleteRow(m, d, k)} 
+          return <ComponentArray
+                  m={m}
+                  changeValue={(e,m,value)=>this.changeValue(e, m, value)}
+                  changeKey={(e,m,key)=>this.changeKey(e,m,key)}
+                  data={data} k={key}
+                  addRow={(m)=>this.addRow(m)}
+                  deleteRow={(m, d, k)=>this.deleteRow(m, d, k)}
+                  types={this.state.types}
+                  arrayTypes={this.state.arrayTypes}
+                  handleChange={(e, m, value)=>this.handleChange(e, m, value)}
                   />;
       }else {
-        return <ComponentObject 
-                m={m} 
-                changeKey={(e,m,key)=>this.changeKey(e,m,key)} 
-                addRow={(m)=>this.addRow(m)} 
-                deleteRow={(m, d, k)=>this.deleteRow(m, d, k)} 
-                switchFunc={(m, data, k)=>this.switchFunc(m, data, k)} 
-                data={data} 
-                k={key} 
+        return <ComponentObject
+                m={m}
+                changeKey={(e,m,key)=>this.changeKey(e,m,key)}
+                addRow={(m)=>this.addRow(m)}
+                deleteRow={(m, d, k)=>this.deleteRow(m, d, k)}
+                switchFunc={(m, data, k)=>this.switchFunc(m, data, k)}
+                data={data}
+                k={key}
+                types={this.state.types}
+                handleChange={(e, m, value)=>this.handleChange(e, m, value)}
                 />;
       }
       case "number":
-        return <ComponentNumber 
-                m={m} changeValue={(e,m,value)=>this.changeValue(e, m, value)} 
-                changeKey={(e,m,key)=>this.changeKey(e,m,key)} 
-                data={data} 
-                k={key} 
-                deleteRow={(m, d, k)=>{this.deleteRow(m, d, k)}} 
+        return <ComponentNumber
+                m={m} changeValue={(e,m,value)=>this.changeValue(e, m, value)}
+                changeKey={(e,m,key)=>this.changeKey(e,m,key)}
+                data={data}
+                k={key}
+                deleteRow={(m, d, k)=>{this.deleteRow(m, d, k)}}
+                types={this.state.types}
+                handleChange={(e, m, value)=>this.handleChange(e, m, value)}
                 />;
     }
   }
