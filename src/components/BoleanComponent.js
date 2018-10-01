@@ -36,7 +36,6 @@ const ComponentBolean = props => {
           <TextField
             id="outlined-uncontrolled"
             label="value"
-            defaultValue ={props.data}
             onChange={(e)=>props.changeValue(e, props.m, props.k)}
             value={props.data}
             margin="normal"
