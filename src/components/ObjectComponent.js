@@ -38,10 +38,16 @@ const ComponentObject = props =>{
               </MenuItem>
             ))}
           </TextField>
-          <Button style={{margin:"15px 0px 0px 10px"}} onClick={()=>props.addRow(props.data)} variant="fab">
+          <Button 
+            style={{margin:"15px 0px 0px 10px"}} 
+            onClick={()=>props.addRow(props.data)} 
+            variant="fab">
             <AddIcon />
           </Button>
-          <Button style={{margin:"15px 0px 0px 10px"}} onClick={()=>props.deleteRow(props.m, props.data, props.k)} variant="fab">
+          <Button 
+            style={{margin:"15px 0px 0px 10px"}} 
+            onClick={()=>props.deleteRow(props.m, props.data, props.k)} 
+            variant="fab">
             <DeleteIcon />
           </Button>
 

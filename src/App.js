@@ -17,7 +17,10 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mockData: JSON.parse(localStorage.getItem('mockData'))?JSON.parse(localStorage.getItem('mockData')):{},
+      //get data from localstorage
+      mockData: JSON.parse(localStorage.getItem('mockData'))
+                ?JSON.parse(localStorage.getItem('mockData'))
+                :{},
       types: [
         {
           value: "object",
@@ -58,39 +61,42 @@ class App extends Component {
     };
 
   }
+
   addRow = (m) => {
-    if (Array.isArray(m)) {
-      m.push({
-        "": ""
-      });
+    //this function takes object or array as a parameter and add an emty proprty with it value
+    if (Array.isArray(m)) { // test if is an array
+      m.push({"": ""});
     } else {
       m[""] = "";
     }
+    //refresh state
     let mockData = this.state.mockData;
     this.setState({
       mockData
     });
-    localStorage.setItem('mockData',JSON.stringify(mockData))
+    localStorage.setItem('mockData',JSON.stringify(mockData)); //store it in localstorage
   }
   changeKey = (e, m, key) => {
-    if (key != e.target.value) {
+    
+    if (key != e.target.value) {//test the old key with the new key
       m[e.target.value] = m[key];
-      delete m[key];
+      delete m[key]; //delete the old key and replace it with the new key
     }
-
+    //refresh state
     let mockData = this.state.mockData;
     this.setState({
       mockData
     });
-    localStorage.setItem('mockData',JSON.stringify(mockData))
+    localStorage.setItem('mockData',JSON.stringify(mockData));//store it in localstorage
   }
   changeValue = (e, m, key) => {
     m[key] = e.target.value;
+    //refresh state
     let mockData = this.state.mockData;
     this.setState({
       mockData
     });
-    localStorage.setItem('mockData',JSON.stringify(mockData))
+    localStorage.setItem('mockData',JSON.stringify(mockData));//store it in localstorage
   }
   handleChange = (e, m, key) => {
     if (e.target.value == "number") {
@@ -104,12 +110,12 @@ class App extends Component {
     }else if (e.target.value == "array") {
         m[key] = [];
     }
-
+    //refresh state
     let mockData = this.state.mockData;
     this.setState({
       mockData
     });
-    localStorage.setItem('mockData',JSON.stringify(mockData))
+    localStorage.setItem('mockData',JSON.stringify(mockData));//store it in localstorage
   }
   deleteRow = (m, data, key) => {
     if (Array.isArray(m)) {
@@ -124,7 +130,7 @@ class App extends Component {
     this.setState({
       mockData
     });
-    localStorage.setItem('mockData',JSON.stringify(mockData))
+    localStorage.setItem('mockData',JSON.stringify(mockData));//store it in localstorage
   }
 
   switchFunc = (m, data, key)=>{
