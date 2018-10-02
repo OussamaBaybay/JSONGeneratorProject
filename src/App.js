@@ -77,10 +77,9 @@ class App extends Component {
     localStorage.setItem('mockData',JSON.stringify(mockData)); //store it in localstorage
   }
   changeKey = (e, m, key) => {
-    
     if (key != e.target.value) {//test the old key with the new key
-      m[e.target.value] = m[key];
-      delete m[key]; //delete the old key and replace it with the new key
+      m[e.target.value] = m[key];//create new key with the old value
+      delete m[key]; //delete the old key 
     }
     //refresh state
     let mockData = this.state.mockData;
@@ -90,7 +89,7 @@ class App extends Component {
     localStorage.setItem('mockData',JSON.stringify(mockData));//store it in localstorage
   }
   changeValue = (e, m, key) => {
-    m[key] = e.target.value;
+    m[key] = e.target.value; //changing value
     //refresh state
     let mockData = this.state.mockData;
     this.setState({
@@ -99,6 +98,7 @@ class App extends Component {
     localStorage.setItem('mockData',JSON.stringify(mockData));//store it in localstorage
   }
   handleChange = (e, m, key) => {
+    //when change type convert value to the new type
     if (e.target.value == "number") {
         m[key] = 0;
     }else if (e.target.value == "string") {
